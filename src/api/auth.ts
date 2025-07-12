@@ -6,9 +6,10 @@ import {
   onAuthStateChanged,
   type User,
 } from 'firebase/auth';
+import app from '../firebase'; // Import the initialized app
 
 const provider = new GoogleAuthProvider();
-const auth = getAuth();
+const auth = getAuth(app); // Get auth instance from the initialized app
 
 export const signInWithGoogle = async (): Promise<User | null> => {
   try {

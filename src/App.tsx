@@ -1,6 +1,4 @@
-import { initializeApp } from "firebase/app";
 import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { firebaseConfig } from "./firebaseConfig";
 import { AuthProvider, useAuth } from "./hooks/useAuth";
 import BudgetsPage from "./pages/BudgetsPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -9,8 +7,7 @@ import SettingsPage from "./pages/SettingsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { signOut } from "./api/auth";
 
-// Initialize Firebase
-initializeApp(firebaseConfig);
+// Firebase is now initialized in src/firebase.ts
 
 function Navigation() {
   const { user } = useAuth();
