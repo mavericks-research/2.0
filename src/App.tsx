@@ -11,7 +11,7 @@ initializeApp(firebaseConfig);
 function App() {
 	return (
 		<Router>
-			<div>
+      <div className="app-container">
 				<nav>
 					<ul>
 						<li>
