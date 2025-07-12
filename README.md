@@ -30,6 +30,10 @@ This project requires a Firebase project to handle authentication and database s
 3.  Copy the `firebaseConfig` object provided by Firebase.
 4.  Rename `src/firebaseConfig.ts.example` to `src/firebaseConfig.ts` (or create the file if it doesn't exist).
 5.  Replace the placeholder configuration in `src/firebaseConfig.ts` with your actual Firebase project configuration.
+6.  **Enable Google Sign-In:**
+    *   In the Firebase Console, go to the **Authentication** section.
+    *   Click on the **Sign-in method** tab.
+    *   Find **Google** in the list of providers, click the pencil icon to edit, and **enable** it.
 
 ## Running the Development Server
 
