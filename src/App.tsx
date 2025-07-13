@@ -4,6 +4,7 @@ import BudgetsPage from "./pages/BudgetsPage";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import SettingsPage from "./pages/SettingsPage";
+import SpendingEntryPage from "./pages/SpendingEntryPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { signOut } from "./api/auth";
 
@@ -26,6 +27,9 @@ function Navigation() {
               <Link to="/settings">Settings</Link>
             </li>
             <li>
+              <Link to="/spending/new">Add Expense</Link>
+            </li>
+            <li>
               <button type="button" onClick={signOut}>Sign Out</button>
             </li>
           </>
@@ -44,6 +48,7 @@ function AppRoutes() {
         <Route path="/" element={<DashboardPage />} />
         <Route path="/budgets" element={<BudgetsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/spending/new" element={<SpendingEntryPage />} />
       </Route>
     </Routes>
   );
