@@ -32,8 +32,8 @@ const RecentTxList: React.FC = () => {
         <ul>
           {transactions.map((tx) => (
             <li key={tx.id}>
-              {tx.date} - {tx.category} - ${tx.amount}
               <button onClick={() => handleDelete(tx.id)}>Delete</button>
+              {tx.date} - {tx.category} - ${tx.amount}
             </li>
           ))}
         </ul>
