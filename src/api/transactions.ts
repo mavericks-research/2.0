@@ -5,13 +5,12 @@ import { getAuth } from 'firebase/auth';
 const db = getFirestore(app);
 
 interface TransactionData {
-  // Define the shape of the transaction data
+  id?: string;
   date: string;
   category: string;
   amount: number;
   paymentMethod: string;
   frequency: string;
-  // Add other fields as necessary, e.g., notes
 }
 
 export const addTransaction = async (data: TransactionData): Promise<void> => {
@@ -65,4 +64,24 @@ export const getTransactions = async () => {
   });
 
   return transactions;
+};
+
+import { deleteDoc, doc } from 'firebase/firestore';
+
+export const deleteTransaction = async (transactionId: string): Promise<void> => {
+  const auth = getAuth(app);
+  const user = auth.currentUser;
+
+  if (!user) {
+    throw new Error('No user is signed in to delete a transaction.');
+  }
+
+  try {
+    const transactionRef = doc(db, 'transactions', transactionId);
+    await deleteDoc(transactionRef);
+    console.log('Transaction deleted successfully');
+  } catch (error) {
+    console.error('Error deleting transaction:', error);
+    throw error;
+  }
 };

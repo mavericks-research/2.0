@@ -26,7 +26,7 @@ const useTransactions = () => {
     fetchTransactions();
   }, []);
 
-  return { transactions, loading, error };
+  return { transactions, loading, error, setTransactions };
 };
 
 export default useTransactions;
