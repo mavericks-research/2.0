@@ -1,15 +1,33 @@
-import type React from "react";
+import React from 'react';
+import useTransactions from '../../hooks/useTransactions';
 
 const RecentTxList: React.FC = () => {
-	return (
-		<div>
-			<h2>Recent Transactions</h2>
-			<ul>
-				<li>Loading...</li>
-				{/* Placeholder for recent transaction items */}
-			</ul>
-		</div>
-	);
+  const { transactions, loading, error } = useTransactions();
+
+  if (loading) {
+    return <p>Loading transactions...</p>;
+  }
+
+  if (error) {
+    return <p>Error loading transactions: {error.message}</p>;
+  }
+
+  return (
+    <div>
+      <h2>Recent Transactions</h2>
+      {transactions.length > 0 ? (
+        <ul>
+          {transactions.map((tx) => (
+            <li key={tx.id}>
+              {tx.date} - {tx.category} - ${tx.amount}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No recent transactions to display.</p>
+      )}
+    </div>
+  );
 };
 
 export default RecentTxList;
