@@ -1,27 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { addBudget } from '../api/budgets';
 
 const CreateBudgetPage: React.FC = () => {
-  // For now, this will be a simplified version of the budget page.
-  // In the future, this will contain a form to create a new budget.
+  const [name, setName] = useState('');
+  const [month, setMonth] = useState('');
+  const navigate = useNavigate();
+
+  const handleSave = async () => {
+    if (!name || !month) {
+      alert('Please fill out all fields.');
+      return;
+    }
+
+    try {
+      const newBudgetId = await addBudget({
+        name,
+        month,
+        income: { planned: 0, actual: 0 },
+        expenses: {},
+      });
+      navigate(`/budgets/${newBudgetId}`);
+    } catch (error) {
+      console.error('Failed to save budget:', error);
+      alert('Failed to save budget. Please try again.');
+    }
+  };
+
   return (
     <div>
-      <header>
-        <h1>Create a New Budget</h1>
-      </header>
-      <main>
-        <section className="income-section">
-          <h2>Income</h2>
-          <input type="text" placeholder="Salary" />
-          <input type="text" placeholder="Freelance" />
-        </section>
-        <section className="expenses-section">
-          <h2>Expenses</h2>
-          <input type="text" placeholder="Housing" />
-          <input type="text" placeholder="Transportation" />
-          <input type="text" placeholder="Food" />
-        </section>
-        <button>Save Budget</button>
-      </main>
+      <h1>Create a New Budget</h1>
+      <input
+        type="text"
+        placeholder="Budget Name (e.g., July 2025)"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type="month"
+        value={month}
+        onChange={(e) => setMonth(e.target.value)}
+      />
+      <button onClick={handleSave}>Save Budget</button>
     </div>
   );
 };
