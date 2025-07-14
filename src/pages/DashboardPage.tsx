@@ -3,6 +3,7 @@ import AccountsTable from "../components/Dashboard/AccountsTable";
 import BudgetProgress from "../components/Dashboard/BudgetProgress";
 import NetWorthCard from "../components/Dashboard/NetWorthCard";
 import RecentTxList from "../components/Dashboard/RecentTxList";
+import BudgetList from "../components/Dashboard/BudgetList";
 
 const DashboardPage: React.FC = () => {
 	return (
@@ -12,6 +13,7 @@ const DashboardPage: React.FC = () => {
 			<AccountsTable />
 			<BudgetProgress />
 			<RecentTxList />
+			<BudgetList />
 			{/* Further layout and styling will be needed */}
 		</div>
 	);

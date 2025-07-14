@@ -40,13 +40,16 @@ function Navigation() {
 }
 
 
+import CreateBudgetPage from "./pages/CreateBudgetPage";
+
 function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<DashboardPage />} />
-        <Route path="/budgets" element={<BudgetsPage />} />
+        <Route path="/budgets/new" element={<CreateBudgetPage />} />
+        <Route path="/budgets/:budgetId" element={<BudgetsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/spending/new" element={<SpendingEntryPage />} />
       </Route>
