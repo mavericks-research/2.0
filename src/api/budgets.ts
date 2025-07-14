@@ -22,6 +22,8 @@ export interface Budget {
   createdAt: any; // Let Firestore handle the timestamp
 }
 
+import { query, where, getDocs } from 'firebase/firestore';
+
 export const addBudget = async (budgetData: Omit<Budget, 'uid' | 'createdAt'>): Promise<string> => {
   const auth = getAuth(app);
   const user = auth.currentUser;
@@ -42,4 +44,24 @@ export const addBudget = async (budgetData: Omit<Budget, 'uid' | 'createdAt'>): 
     console.error('Error adding budget:', error);
     throw error;
   }
+};
+
+export const getBudgets = async (): Promise<Budget[]> => {
+  const auth = getAuth(app);
+  const user = auth.currentUser;
+
+  if (!user) {
+    throw new Error('No user is signed in to fetch budgets.');
+  }
+
+  const budgetsCol = collection(db, 'budgets');
+  const q = query(budgetsCol, where('uid', '==', user.uid));
+
+  const querySnapshot = await getDocs(q);
+  const budgets: Budget[] = [];
+  querySnapshot.forEach((doc) => {
+    budgets.push({ id: doc.id, ...doc.data() } as Budget);
+  });
+
+  return budgets;
 };

@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useBudgets from '../../hooks/useBudgets';
 
 const BudgetList: React.FC = () => {
-  // This will be replaced with actual data fetched from Firebase
-  const budgets = [
-    { id: '1', name: 'July 2025' },
-    { id: '2', name: 'August 2025' },
-  ];
+  const { budgets, loading, error } = useBudgets();
+
+  if (loading) {
+    return <p>Loading budgets...</p>;
+  }
+
+  if (error) {
+    return <p>Error loading budgets: {error.message}</p>;
+  }
 
   return (
     <div>
