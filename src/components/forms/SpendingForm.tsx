@@ -29,7 +29,12 @@ const SpendingForm: React.FC = () => {
     setError(null);
 
     try {
-      await addTransaction(formData);
+      // Convert amount to a number before sending
+      const transactionData = {
+        ...formData,
+        amount: parseFloat(formData.amount),
+      };
+      await addTransaction(transactionData);
       // Reset form on success
       setFormData({
         date: getTodayString(),
@@ -38,7 +43,7 @@ const SpendingForm: React.FC = () => {
         paymentMethod: '',
         frequency: 'one-off',
       });
-      alert('Expense added successfully!'); // Simple feedback for now
+      alert('Expense added successfully!');
     } catch (err) {
       setError('Failed to add expense. Please try again.');
       console.error(err);
